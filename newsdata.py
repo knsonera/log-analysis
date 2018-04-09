@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Logs Analysis Project - newsdata.py
 #
 # This module provides methods for generating reports.

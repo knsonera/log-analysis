@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Logs Analysis Project - Report Generator
 #
 # The program you write in this project will run from the command line.
