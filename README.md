@@ -7,8 +7,8 @@ and print out the answers to these questions:
 
 1. What are the most popular three articles of all time?
 (Which articles have been accessed the most?)
-**Example:**
 ```
+Example:
   - "Princess Shellfish Marries Prince Handsome" — 1201 views
   - "Baltimore Ravens Defeat Rhode Island Shoggoths" — 915 views
   - "Political Scandal Ends In Political Scandal" — 553 views
@@ -17,16 +17,16 @@ and print out the answers to these questions:
 2. Who are the most popular article authors of all time?
 (That is, when you sum up all of the articles each author has written,
 which authors get the most page views?)
-**Example:**
 ```
+Example:
   - Ursula La Multa — 2304 views
   - Rudolf von Treppenwitz — 1985 views
   - Anonymous Contributor — 1023 views
 ```
 
 3. On which days did more than 1% of requests lead to errors?
-**Example:**
 ```
+Example:
   - July 29, 2016 — 2.5% errors
 ```
 ## What's inside:
@@ -34,7 +34,7 @@ which authors get the most page views?)
 - Report Generator - report_generator.py
 
 ## What's under the hood
-###newsdata.py###
+###newsdata.py
 This module provides methods for generating reports.
 Methods:
 - **get_articles()**
@@ -77,9 +77,8 @@ Example:
 [(2016-07-01, 932, 1),(2016-07-02, 1225, 56),(2016-07-03, 342, 12)...]
 ```
 
-###report_generator.py###
+###report_generator.py
 This module generates reports using data from news database.
-
 
 
 ## Try me!
