@@ -14,27 +14,22 @@ import psycopg2
 def get_articles():
     """
     TOP-3 of the most popular articles
-    Returns list of tuples. Every tuple contains title and number of views.
-    List is sorted by number of views.
+    Returns list of tuples.
+    List contains only three tuples - top-3 paths with most number of successful
+    requests. Every tuple contains title and number of views.
+    List is sorted by number of views in descending order.
     Example:
       >>> print(get_articles())
       [("First Article", 730),("Second Article", 543), ("Third Article", 173)]
     """
     pq = psycopg2.connect("dbname=news")
     c = pq.cursor()
-    c.execute("create view viewTop as\
-      select path, count(id) as num\
-      from log\
-      where path like '/article/%' and status like '200 OK'\
-      group by path\
-      order by num DESC limit 3;")
     c.execute("select articles.title, viewTop.num\
       from articles join viewTop\
       on viewTop.path like concat('%', articles.slug)\
       where viewTop.path like concat('%', articles.slug)\
       order by viewTop.num DESC;")
     results = c.fetchall()
-    c.execute("drop view viewTop;")
     pq.close()
     return results
 
@@ -43,7 +38,7 @@ def get_authors():
     """
     Popular authors of all times
     Returns list of tuples. Every tuple contains author and number of views.
-    Number of views is a sum of views of all author's articles.
+    Number of views is a sum of successful requests of all author's articles.
     List contains all authors. List is sorted by number of views.
     Example:
       >>> print(get_authors())
@@ -51,25 +46,12 @@ def get_authors():
     """
     pq = psycopg2.connect("dbname=news")
     c = pq.cursor()
-    c.execute("create view viewTop as\
-      select path, count(id) as num\
-      from log\
-      where path like '/article/%' and status like '200 OK'\
-      group by path;")
-    c.execute("create view viewAuthors as\
-      select articles.author, viewTop.num\
-      from articles join viewTop\
-      on viewTop.path like concat('%', articles.slug)\
-      where viewTop.path like concat('%', articles.slug)\
-      order by viewTop.num DESC;")
     c.execute("select authors.name, sum(viewAuthors.num) as views\
         from authors join viewAuthors\
         on authors.id = viewAuthors.author\
         group by authors.name\
         order by views DESC;")
     results = c.fetchall()
-    c.execute("drop view viewAuthors;")
-    c.execute("drop view viewTop;")
     pq.close()
     return results
 
