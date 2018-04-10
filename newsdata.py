@@ -15,7 +15,7 @@ def get_articles():
     """
     TOP-3 of the most popular articles
     Returns list of tuples.
-    List contains only three tuples - top-3 paths with most number of successful
+    List contains only three tuples - top3 paths with most number of successful
     requests. Every tuple contains title and number of views.
     List is sorted by number of views in descending order.
     Example:

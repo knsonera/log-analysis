@@ -1,4 +1,10 @@
+#!/usr/bin/python3
+
+# Logs Analysis Project - init.py
+# This module creates views for newsdata methods.
+
 import psycopg2
+
 
 def create_views():
     pq = psycopg2.connect("dbname=news")
@@ -18,7 +24,8 @@ def create_views():
               from log\
               where path like '/article/%' and status like '200 OK'\
               group by path;")
-    # viewAuthors contains article author ids and number of requests for article
+    # viewAuthors contains article's author ids
+    # and number of requests for article
     c.execute("create view viewAuthors as\
               select articles.author, viewArticles.num\
               from articles join viewArticles\
